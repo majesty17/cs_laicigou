@@ -32,6 +32,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label_chaused = new System.Windows.Forms.Label();
             this.button_clear = new System.Windows.Forms.Button();
             this.textBox_outmsg = new System.Windows.Forms.TextBox();
             this.textBox_cha = new System.Windows.Forms.TextBox();
@@ -70,6 +71,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label_chaused);
             this.tabPage1.Controls.Add(this.button_clear);
             this.tabPage1.Controls.Add(this.textBox_outmsg);
             this.tabPage1.Controls.Add(this.textBox_cha);
@@ -87,6 +89,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "市场";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label_chaused
+            // 
+            this.label_chaused.AutoSize = true;
+            this.label_chaused.Location = new System.Drawing.Point(736, 342);
+            this.label_chaused.Name = "label_chaused";
+            this.label_chaused.Size = new System.Drawing.Size(62, 18);
+            this.label_chaused.TabIndex = 14;
+            this.label_chaused.Text = "label3";
             // 
             // button_clear
             // 
@@ -273,6 +284,7 @@
         private System.Windows.Forms.Button button_getorderlist;
         private System.Windows.Forms.TextBox textBox_orderlist;
         private System.Windows.Forms.Button button_clear;
+        private System.Windows.Forms.Label label_chaused;
     }
 }
 

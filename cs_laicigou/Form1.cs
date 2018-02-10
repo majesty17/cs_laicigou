@@ -102,6 +102,8 @@ namespace cs_laicigou
                     textBox_outmsg.AppendText(msg + "---" + price_str + "\r\n");
                     if (msg.Contains("有人抢先下单啦"))
                         bought.Add(vcode);
+                    label_chaused.Text = "used...";
+                    label_chaused.ForeColor = Color.Red;
                 }
 
             }
@@ -136,6 +138,8 @@ namespace cs_laicigou
 
                     //清空自己
                     textBox_cha.Clear();
+                    label_chaused.Text = "new cha";
+                    label_chaused.ForeColor = Color.Green;
                 }
                 catch (Exception ex) {
                     Console.WriteLine(ex.Message);
