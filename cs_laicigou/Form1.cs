@@ -21,6 +21,9 @@ namespace cs_laicigou
         string seed = "";
         string newseed = "";
 
+        List<string> bought = null; //保存已经抢过的vcode
+
+
         public Form1()
         {
             InitializeComponent();
@@ -52,6 +55,7 @@ namespace cs_laicigou
             isrunning = !isrunning;
             if (isrunning)
             {
+                bought = new List<string>(); //
                 //cookie = textBox_cookie.Text.Trim();
                 max_price = Convert.ToDouble(textBox_max.Text);
                 button_refresh.Text = "停止";
@@ -90,11 +94,14 @@ namespace cs_laicigou
                 {
                     string petid=(string)apet["petId"];
                     string vcode=(string)apet["validCode"];
-                    if (vcode.Equals(""))
+                    if (vcode.Equals("") || bought.Contains(vcode))
                         return;
                     string price_str=(string)apet["amount"];
                     string newret=Dog.buyPet(petid, vcode, cookie, price_str, seed, cha);
-                    textBox_outmsg.AppendText(newret.Split(new char[1] { '"' })[7] + "---" + price_str + "\r\n");
+                    string msg = newret.Split(new char[1] { '"' })[7];
+                    textBox_outmsg.AppendText(msg + "---" + price_str + "\r\n");
+                    if (msg.Contains("有人抢先下单啦"))
+                        bought.Add(vcode);
                 }
 
             }

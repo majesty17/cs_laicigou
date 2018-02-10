@@ -32,6 +32,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button_clear = new System.Windows.Forms.Button();
             this.textBox_outmsg = new System.Windows.Forms.TextBox();
             this.textBox_cha = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -46,7 +47,6 @@
             this.button_getorderlist = new System.Windows.Forms.Button();
             this.textBox_user = new System.Windows.Forms.TextBox();
             this.button_getuser = new System.Windows.Forms.Button();
-            this.button_clear = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -87,6 +87,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "市场";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button_clear
+            // 
+            this.button_clear.Location = new System.Drawing.Point(634, 440);
+            this.button_clear.Name = "button_clear";
+            this.button_clear.Size = new System.Drawing.Size(87, 38);
+            this.button_clear.TabIndex = 13;
+            this.button_clear.Text = "清除";
+            this.button_clear.UseVisualStyleBackColor = true;
+            this.button_clear.Click += new System.EventHandler(this.button_clear_Click);
             // 
             // textBox_outmsg
             // 
@@ -151,7 +161,7 @@
             this.textBox_max.Name = "textBox_max";
             this.textBox_max.Size = new System.Drawing.Size(100, 28);
             this.textBox_max.TabIndex = 6;
-            this.textBox_max.Text = "1000.0";
+            this.textBox_max.Text = "500.0";
             // 
             // textBox_cookie
             // 
@@ -159,9 +169,7 @@
             this.textBox_cookie.Name = "textBox_cookie";
             this.textBox_cookie.Size = new System.Drawing.Size(737, 28);
             this.textBox_cookie.TabIndex = 5;
-            this.textBox_cookie.Text = "1E3QndSfkFCWXRHflBIYmI4bFhVYWFnSUVtNjZKeWZqMzdyNXhJRlpMUXV4YUJhQUFBQUFBJCQAAAAAAA" +
-                "AAAAEAAADfcKMjbWFqZXN0eTE3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
-                "AAAAAAAAAAAAAAAAAAAC44eVouOHlab";
+            this.textBox_cookie.Text = "cookie here";
             this.textBox_cookie.Leave += new System.EventHandler(this.textBox_cookie_Leave);
             // 
             // button_refresh
@@ -223,16 +231,6 @@
             this.button_getuser.Text = "用户信息";
             this.button_getuser.UseVisualStyleBackColor = true;
             this.button_getuser.Click += new System.EventHandler(this.button_getuser_Click);
-            // 
-            // button_clear
-            // 
-            this.button_clear.Location = new System.Drawing.Point(634, 440);
-            this.button_clear.Name = "button_clear";
-            this.button_clear.Size = new System.Drawing.Size(87, 38);
-            this.button_clear.TabIndex = 13;
-            this.button_clear.Text = "清除";
-            this.button_clear.UseVisualStyleBackColor = true;
-            this.button_clear.Click += new System.EventHandler(this.button_clear_Click);
             // 
             // Form1
             // 
