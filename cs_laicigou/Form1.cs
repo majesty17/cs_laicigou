@@ -31,6 +31,19 @@ namespace cs_laicigou
         private void Form1_Load(object sender, EventArgs e)
         {
             cookie = textBox_cookie.Text.Trim();
+
+            //拿下次的码&显示，seed存newseed
+            try
+            {
+                string ret = Dog.getCha(cookie);
+                JObject res_j = (JObject)JsonConvert.DeserializeObject(ret);
+                //MessageBox.Show(ret);
+                newseed = (string)res_j["data"]["seed"];
+                string img = (string)res_j["data"]["img"];
+
+                pictureBox1.Image = Dog.str2Image(img);
+            }
+            catch (Exception ex) { }
         }
 
         //开始刷新
@@ -66,7 +79,7 @@ namespace cs_laicigou
 
                 JObject apet = (JObject)res_ja[0];
 
-                textBox_output.AppendText("==============\r\n");
+                //textBox_output.AppendText("==============\r\n");
 
 
                 double price = Convert.ToDouble(apet["amount"]);
@@ -77,28 +90,13 @@ namespace cs_laicigou
                 {
                     string petid=(string)apet["petId"];
                     string vcode=(string)apet["validCode"];
+                    if (vcode.Equals(""))
+                        return;
                     string price_str=(string)apet["amount"];
                     string newret=Dog.buyPet(petid, vcode, cookie, price_str, seed, cha);
-                    textBox_output.AppendText(newret + "\r\n");
+                    textBox_outmsg.AppendText(newret.Split(new char[1] { '"' })[7] + "---" + price_str + "\r\n");
                 }
 
-
-                ////listView1.Items.Clear();
-                //for (int i = 0; i < res_ja.Count; i++)
-                //{
-                //    ListViewItem lvi = new ListViewItem((string)res_ja[i]["id"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["petId"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["birthType"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["mutation"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["generation"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["rareDegree"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["desc"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["petType"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["amount"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["bgColor"]);
-                //    lvi.SubItems.Add((string)res_ja[i]["petUrl"]);
-                //    //listView1.Items.Add(lvi);
-                //}
             }
             catch (Exception ex)
             {
@@ -111,7 +109,7 @@ namespace cs_laicigou
         //input cha
         private void textBox_cha_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && textBox_cha.Text.Length==4)
             {
                 try
                 {
@@ -127,7 +125,7 @@ namespace cs_laicigou
                     string img = (string)res_j["data"]["img"];
 
                     pictureBox1.Image = Dog.str2Image(img);
-
+                    pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
 
                     //清空自己
                     textBox_cha.Clear();
@@ -156,6 +154,32 @@ namespace cs_laicigou
         private void textBox_cookie_Leave(object sender, EventArgs e)
         {
             cookie = textBox_cookie.Text.Trim();
+        }
+
+        //获取订单列表
+        private void button_getorderlist_Click(object sender, EventArgs e)
+        {
+            string ret = Dog.getMyOrder(cookie);
+            JObject res_j = (JObject)JsonConvert.DeserializeObject(ret);
+            JArray res_ja = (JArray)res_j["data"]["dataList"];
+            textBox_orderlist.Clear();
+
+            for (int i = 0; i < res_ja.Count; i++) {
+                JObject apet = (JObject)res_ja[i];
+                string amount = (string)apet["amount"];
+                int status = (int)apet["status"];
+                int txnstatus = (int)apet["txnStatus"];
+
+
+                string strput = txnstatus == 1 ? "上链中...\r\n" : "" + (status == 1 ? ("+" + amount) : ("-" + amount)) + "\r\n";
+                textBox_orderlist.AppendText(strput);
+            }
+        }
+
+        private void button_clear_Click(object sender, EventArgs e)
+        {
+            textBox_outmsg.Clear();
+            textBox_output.Clear();
         }
 
 
